@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tim Horton's Coffee Shop</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    
+</head>
+<body>
+    <div id="order-page">
+        <img src="Images/banner.png" alt="Tim Horton's Banner" class="banner-img">
+        <h1>Welcome to Tim Horton's!</h1>
+        
+        <div class="form-container">
+            <form action="thankyou.html" method="post" id="order-form">
+                <label for="coffee">Number of Coffees:</label>
+                <input type="number" id="coffee" name="coffee" min="1" max="10" required><br><br>
+                
+                <label for="size">Size:</label>
+                <select id="size" name="size">
+					<option value="select">Select</option>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+					<option value="extra-large">Extra-Large</option>
+                </select><br><br>
+                
+                <label for="creams">Cream:</label>
+                <input type="number" id="creams" name="creams" min="0" max="10" required><br><br>
+                
+                <label for="sugars">Sugar:</label>
+                <input type="number" id="sugars" name="sugars" min="0" max="10" required><br><br>
+                
+                <input type="submit" value="Order Coffee">
+            </form>
+        </div>
+        
+        <div id="coffee-cups"></div>
+    </div>
+
+    <script>
+        document.getElementById("order-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  
+  var coffeeCount = document.getElementById("coffee").value;
+  var size = document.getElementById("size").value;
+  var creams = document.getElementById("creams").value;
+  var sugars = document.getElementById("sugars").value;
+
+  
+  localStorage.setItem("coffeeCount", coffeeCount);
+  localStorage.setItem("size", size);
+  localStorage.setItem("creams", creams);
+  localStorage.setItem("sugars", sugars);
+
+  window.location.href = "order_summary.html";
+});
+    </script>
+</body>
+</html>

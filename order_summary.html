@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Summary</title>
+    <style>
+        body {
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .coffee-cup-container {
+            display: inline-block;
+            position: relative;
+            border: 2px solid black;
+            padding: 20px;
+            background-color: aliceblue;
+        }
+
+        .coffee-cup,
+        .cream,
+        .sugar {
+            display: inline-block;
+            vertical-align: middle;
+            max-height: 200px;
+            position: relative;
+        }
+
+        .coffee-cup::before,
+        .cream::before,
+        .sugar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .cream {
+            margin-left: -15px;
+        }
+
+        .highlight {
+            background-color: aliceblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Thank you for ordering, here is your bill: -</h1>
+
+        <div id="order-details">
+            <div id="coffee-cups"></div>
+
+            <div id="bill">
+                <p id="coffee-price"></p>
+                <p id="creams-price"></p>
+                <p id="sugars-price"></p>
+                <p id="tax"></p>
+                <p id="total-price" class="highlight"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve the coffee cup count from local storage
+        var coffeeCount = localStorage.getItem("coffeeCount");
+        var size = localStorage.getItem("size");
+        var creams = localStorage.getItem("creams");
+        var sugars = localStorage.getItem("sugars");
+
+        // Calculate prices
+        var coffeePrice = 0;
+        if (size === "small") {
+            coffeePrice = 1.5;
+        } else if (size === "medium") {
+            coffeePrice = 2.3;
+        } else if (size === "large") {
+            coffeePrice = 3.1;
+        } else if (size === "extra-large"){
+			coffeePrice = 4.0;
+		}
+
+        coffeePrice *= coffeeCount; // Multiply coffee price by the number of copies
+
+        var creamsPrice = creams * 1;
+        var sugarsPrice = sugars * 1;
+        var tax = (coffeePrice + creamsPrice + sugarsPrice) * 0.27;
+        var totalPrice = coffeePrice + creamsPrice + sugarsPrice + tax;
+
+        // Create coffee cup images
+        var coffeeCupsContainer = document.getElementById("coffee-cups");
+        coffeeCupsContainer.innerHTML = "";
+
+        for (var i = 0; i < coffeeCount; i++) {
+            var coffeeCupDiv = document.createElement("div");
+            coffeeCupDiv.classList.add("coffee-cup-container");
+
+            var coffeeCupImg = document.createElement("img");
+            coffeeCupImg.src = "Images/COffeeCup.png";
+            coffeeCupImg.alt = "Coffee Cup";
+            coffeeCupImg.classList.add("coffee-cup");
+            coffeeCupDiv.appendChild(coffeeCupImg);
+
+            for (var j = 0; j < creams; j++) {
+                var creamImg = document.createElement("img");
+                creamImg.src = "Images/cream.png";
+                creamImg.alt = "cream";
+                creamImg.classList.add("cream");
+                coffeeCupDiv.appendChild(creamImg);
+            }
+
+            for (var k = 0; k < sugars; k++) {
+                var sugarImg = document.createElement("img");
+                sugarImg.src = "Images/sugar.png";
+                sugarImg.alt = "sugar";
+                sugarImg.classList.add("sugar");
+                coffeeCupDiv.appendChild(sugarImg);
+            }
+
+            coffeeCupsContainer.appendChild(coffeeCupDiv);
+
+            // Add a line break after each set of coffee cup images
+            coffeeCupsContainer.appendChild(document.createElement("br"));
+        }
+
+        // Display the bill on the page
+        document.getElementById("coffee-price").textContent = "Coffee Price: $" + coffeePrice.toFixed(2);
+        document.getElementById("tax").textContent = "Tax (13%): $" + tax.toFixed(2);
+        document.getElementById("total-price").textContent = "Total Price: $" + totalPrice.toFixed(2);
+
+        // Clear the stored data from local storage
+        localStorage.removeItem("coffeeCount");
+        localStorage.removeItem("size");
+        localStorage.removeItem("creams");
+        localStorage.removeItem("sugars");
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:aliceblue;
+  }
+  
+  .banner-img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  h1 {
+    text-align: center;
+    color: black;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .form-container {
+    background-color: lightskyblue;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid wheat;
+    margin-bottom: 10px;
+  }
+  
+  input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: lightpink;
+    color: brown;
+    cursor: pointer;
+  }
+  
+  #thankyou-page {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .coffee-cup {
+    display: block;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: lightsalmon;
+  }
